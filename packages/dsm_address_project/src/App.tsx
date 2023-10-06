@@ -1,14 +1,17 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import TextFiled from "./components/TextFiled";
+import TipContainer from "./components/TipContainer";
 
 function App() {
-  const [searchInput, setSearchInput] = useState<string>("");
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchInput(e.target.value);
-  };
+  const [keyword, setKeyword] = useState("");
   return (
     <>
-      <TextFiled value={searchInput} setValue={setSearchInput} handleChange={handleChange} />
+      <TextFiled
+        onSubmit={(keyword) => {
+          setKeyword(keyword);
+        }}
+      />
+      <TipContainer />
     </>
   );
 }

@@ -1,18 +1,16 @@
-import { ChangeEvent } from "react";
+import useFrom from "@/hooks/useForm";
 import { styled } from "styled-components";
 import { cancel, search } from "../assets/icons";
 
 interface PropsType {
-  value: string;
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  onSubmit: (keyword: string) => void;
 }
 
-export default function TextFiled({
-  value,
-  handleChange,
-  setValue,
-}: PropsType) {
+export default function TextFiled({ onSubmit }: PropsType) {
+  const { value, setValue, handleChange } = useFrom("");
+  const enterEvent = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") onSubmit(value);
+  };
   return (
     <Container>
       <Input
@@ -20,6 +18,7 @@ export default function TextFiled({
         placeholder="도로명, 건물명, 지번검색"
         value={value}
         onChange={handleChange}
+        onKeyUp={enterEvent}
       />
       <aside>
         {value && (
@@ -33,7 +32,7 @@ export default function TextFiled({
         )}
         <button
           onClick={() => {
-            //search
+            onSubmit(value);
           }}
         >
           <img src={search} />
