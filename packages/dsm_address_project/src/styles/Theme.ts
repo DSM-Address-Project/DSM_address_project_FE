@@ -1,5 +1,6 @@
 export const color = {
   point: "#DE781F",
+  gray:"#AAAAAA"
 }
 
 export const {
