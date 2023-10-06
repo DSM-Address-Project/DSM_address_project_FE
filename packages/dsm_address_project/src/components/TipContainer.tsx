@@ -1,4 +1,3 @@
-import react, { useState } from 'react'
 import { styled } from "styled-components";
 import { point } from "../styles/theme";
 
