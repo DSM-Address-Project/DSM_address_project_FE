@@ -4,7 +4,8 @@ export const color = {
 }
 
 export const {
-  point
+  point,
+  gray
 } = color;
 
 export type colorKeyOfType = keyof typeof color;
