@@ -1,4 +1,4 @@
-import useFrom from "@/hooks/useForm";
+import useFrom from "../hooks/useForm";
 import { styled } from "styled-components";
 import { cancel, search } from "../assets/icons";
 
