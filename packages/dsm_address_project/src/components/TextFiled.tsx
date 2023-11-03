@@ -1,44 +1,68 @@
 import useFrom from "../hooks/useForm";
 import { styled } from "styled-components";
 import { cancel, search } from "../assets/icons";
+import AutoCompleteList from "./AutoCompleteList";
+import { useState } from "react";
 
 interface PropsType {
   onSubmit: (keyword: string) => void;
 }
 
 export default function TextFiled({ onSubmit }: PropsType) {
-  const { value, setValue, handleChange } = useFrom("");
+  const [isFocus, setIsFocus] = useState<boolean>(false);
+  const {
+    value: searchValue,
+    setValue: setSearchValue,
+    handleChange,
+  } = useFrom("");
+
   const enterEvent = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") onSubmit(value);
+    if (e.key === "Enter") onSubmit(searchValue);
   };
+
+  const autoCompleteSearch = (keyword: string) => {
+    setSearchValue(keyword);
+    onSubmit(keyword);
+  };
+
   return (
-    <Container>
-      <Input
-        type="text"
-        placeholder="도로명, 건물명, 지번검색"
-        value={value}
-        onChange={handleChange}
-        onKeyUp={enterEvent}
-      />
-      <aside>
-        {value && (
+    <>
+      <Container>
+        <Input
+          type="text"
+          placeholder="도로명, 건물명, 지번검색"
+          value={searchValue}
+          onChange={handleChange}
+          onKeyUp={enterEvent}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
+        />
+        <aside>
+          {searchValue && (
+            <button
+              onClick={() => {
+                setSearchValue("");
+              }}
+            >
+              <img src={cancel} />
+            </button>
+          )}
           <button
             onClick={() => {
-              setValue("");
+              onSubmit(searchValue);
             }}
           >
-            <img src={cancel} />
+            <img src={search} />
           </button>
-        )}
-        <button
-          onClick={() => {
-            onSubmit(value);
-          }}
-        >
-          <img src={search} />
-        </button>
-      </aside>
-    </Container>
+        </aside>
+      </Container>
+      {isFocus && searchValue && (
+        <AutoCompleteList
+          autoCompleteSearch={autoCompleteSearch}
+          keyword={searchValue}
+        />
+      )}
+    </>
   );
 }
 
