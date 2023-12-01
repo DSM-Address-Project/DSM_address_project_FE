@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { point } from "../styles/theme";
+import { point } from "../styles/Theme";
 
 function TipContainer() {
   const examples:{keyword:string,example:string}[] = [
@@ -40,7 +40,7 @@ export default TipContainer;
 
 const Container = styled.div`
   width:calc(100% - 72px);
-  heigth:600px;
+  height:600px;
   padding-left:36px;
   padding-right:36px;
   padding-top:48px;
