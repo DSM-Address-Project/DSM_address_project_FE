@@ -1,6 +1,7 @@
 import Parser from "html-react-parser";
 import { useEffect, useState } from "react";
 import { styled } from "styled-components";
+import useDebounce from "../hooks/useDebounce";
 
 interface PropsType {
   keyword: string;
@@ -27,17 +28,19 @@ export default function AutoCompleteList({
 }: PropsType) {
   const [autoCompleteState, setAutoCompleteState] = useState<Array<string>>([]);
 
+  const debounceKeyword = useDebounce(keyword, 150);
+
   useEffect(() => {
-    if (keyword) {
-      if (autoCompleteObject.filter((item) => item.includes(keyword)))
+    if (debounceKeyword) {
+      if (autoCompleteObject.filter((item) => item.includes(debounceKeyword)))
         setAutoCompleteState(
-          autoCompleteObject.filter((item) => item.includes(keyword)),
+          autoCompleteObject.filter((item) => item.includes(debounceKeyword)),
         );
     } else setAutoCompleteState(autoCompleteObject);
-  }, [keyword]);
+  }, [debounceKeyword]);
 
   const highlight = (item: string) => {
-    return item.replace(keyword, `<span>${keyword}</span>`);
+    return item.replace(debounceKeyword, `<span>${debounceKeyword}</span>`);
   };
 
   return (
