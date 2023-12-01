@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { point } from "../styles/theme";
+import { point } from "../styles/Theme";
 
 function TipContainer() {
   const examples:{keyword:string,example:string}[] = [
