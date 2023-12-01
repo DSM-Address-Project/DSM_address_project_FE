@@ -4,6 +4,7 @@ import { gray,point } from "../styles/Theme";
 
 function ResultBox () {
   const [open, setOpen] = useState<boolean>(false);
+  const [eng,setEng] = useState<boolean>(false);
   const address:string[] = ["서울특별시 종로구 세종로 211","서울특별시 종로구 신문로1가 150","서울특별시 종로구 태평로1가 68 "]
   const onMoreAddress = () => {
     setOpen(true);
@@ -29,7 +30,9 @@ function ResultBox () {
     <Container>
       <ZipCode>
         <div>03186</div>
-        <div>영문보기</div>
+        <div onClick={() => {setEng(!eng)}}>
+          {eng ? "영문보기" : "한글보기"}
+        </div>
       </ZipCode>
       <MainAddress>
         서울특별시 종로구 세종대로 149 (세종로, 광화문빌딩)
@@ -94,7 +97,7 @@ const AssortmentBox = styled.div`
 
 const Assortment = styled.div`
   width:46px;
-  heigth:20px;
+  heigth:18px;
   font-size:12px;
   font-weight:500;
   text-align:center;
@@ -113,6 +116,8 @@ const Address = styled.div`
   color:${gray};
   font-size: 12px;
   font-weight: 400;
+  height:20px;
+  line-height:20px;
 `;
 
 const MoreAddress = styled.div`
