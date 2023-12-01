@@ -34,8 +34,14 @@ export default function TextFiled({ onSubmit }: PropsType) {
           value={searchValue}
           onChange={handleChange}
           onKeyUp={enterEvent}
-          onFocus={() => setIsFocus(true)}
-          onBlur={() => setIsFocus(false)}
+          onFocus={() => {
+            setIsFocus(true);
+          }}
+          onBlur={() => {
+            setTimeout(() => {
+              setIsFocus(false);
+            }, 10);
+          }}
         />
         <aside>
           {searchValue && (

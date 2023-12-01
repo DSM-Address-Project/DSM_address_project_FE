@@ -1,6 +1,6 @@
-import { styled } from "styled-components";
 import Parser from "html-react-parser";
 import { useEffect, useState } from "react";
+import { styled } from "styled-components";
 
 interface PropsType {
   keyword: string;
@@ -29,7 +29,7 @@ export default function AutoCompleteList({
 
   useEffect(() => {
     if (keyword) {
-      if (autoCompleteObject.filter((item) => item.includes(keyword))[0])
+      if (autoCompleteObject.filter((item) => item.includes(keyword)))
         setAutoCompleteState(
           autoCompleteObject.filter((item) => item.includes(keyword)),
         );
@@ -42,8 +42,13 @@ export default function AutoCompleteList({
 
   return (
     <Container>
-      {autoCompleteState.map((item) => (
-        <AutoCompleteItem onClick={() => autoCompleteSearch(item)}>
+      {autoCompleteState.map((item, idx) => (
+        <AutoCompleteItem
+          key={idx}
+          onClick={() => {
+            autoCompleteSearch(item);
+          }}
+        >
           {Parser(highlight(item))}
         </AutoCompleteItem>
       ))}
