@@ -40,7 +40,7 @@ export default TipContainer;
 
 const Container = styled.div`
   width:calc(100% - 72px);
-  heigth:600px;
+  height:600px;
   padding-left:36px;
   padding-right:36px;
   padding-top:48px;
